@@ -3,14 +3,19 @@ import io from 'socket.io-client';
 import axios from 'axios';
 
 class App extends Component {
-  state = { messages: [] }
+  state = { messages: [], userCount: 0 }
   componentDidMount() {
     const socket = io('https://api-chat-baron.herokuapp.com/');
     socket.on('chat message', this.updateMessages);
+    socket.on('user connected', this.updateUserCount);
   }
 
   updateMessages = (msgs) => {
     this.setState({ messages: msgs })
+  }
+
+  updateUserCount = (count) => {
+    this.setState({ userCount: 0 })
   }
 
   onBtnSendClick = () => {
@@ -44,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <center>
-        <h2>Chat Group</h2>
+        <h2>Chat Group (User Connected : {this.state.userCount})</h2>
         <table>
           <thead>
             <tr>
