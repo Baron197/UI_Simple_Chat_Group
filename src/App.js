@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   updateUserCount = (count) => {
-    this.setState({ userCount: 0 })
+    this.setState({ userCount: count })
   }
 
   onBtnSendClick = () => {
