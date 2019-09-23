@@ -8,7 +8,7 @@ class App extends Component {
     const socket = io('https://api-chat-baron.herokuapp.com/');
     socket.on('chat message', this.updateMessages);
     socket.on('user connected', this.updateUserCount);
-    axios.get('https://api-chat-baron.herokuapp.com/getmessages')
+    axios.get('https://api-chat-baron.herokuapp.com/chat/getmessages')
       .then((res) => {
         this.setState({ messages: res.data })
       })
@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   onBtnSendClick = () => {
-    axios.post('https://api-chat-baron.herokuapp.com/sendmessage', {
+    axios.post('https://api-chat-baron.herokuapp.com/chat/sendmessage', {
       nama: this.refs.nama.value,
       message: this.refs.message.value
     }).then((res) => {
@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   onBtnClearClick = () => {
-    axios.delete('https://api-chat-baron.herokuapp.com/clearmessages')
+    axios.delete('https://api-chat-baron.herokuapp.com/chat/clearmessages')
     .then((res) => {
       console.log(res.data)
     })
